@@ -8,7 +8,7 @@ import {
   Button
 } from 'react-native'
 
-const logo = require('../assets/ASL-to-Text Logo.png');
+const logo = require('../assets/Logo.png');
 
 const ASLConverterScreen = () => {
 
@@ -26,27 +26,21 @@ const ASLConverterScreen = () => {
       <View
         style={{
           backgroundColor: "#daecc3ff",
-          flex: 0.15,
+          height: "12%",
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}
       >
         {/* These are the elements inside the navbar */}
         {/* Logo */}
-        <View
+        <Image
           style={{
-            alignItems:"center",
-            justifyContent:"center"
+            width: 100,
+            height: 100,
+            marginLeft: "5%"
           }}
-        >
-          <Image
-            style={{
-              width: 100,
-              height: 100
-            }}
-            source={logo}
-          ></Image>
-        </View>
+          source={logo}
+        ></Image>
 
 
         {/* The two buttons */}
@@ -65,12 +59,11 @@ const ASLConverterScreen = () => {
             }}
           ></Button>
 
-
           <Button
             title="Read"
             onPress={() => console.log("Read")}
             style={{
-              paddingRight: 20
+              marginRight: 30,
             }}
           ></Button>
 
@@ -81,10 +74,14 @@ const ASLConverterScreen = () => {
       {/* This View is the white background where text will be displayed */}
       <View
         style={{
-          flex: 1,
+          width: "90%",
+          height: "85%",
           backgroundColor: "white",
           marginLeft: "auto",
           marginRight: "auto",
+          marginTop: "5%",
+          marginBottom: "5%",
+          borderRadius: 30,
         }}
       ></View>
 
