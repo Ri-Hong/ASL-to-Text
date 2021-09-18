@@ -1,10 +1,11 @@
 // screen where ASL gets converted into English
 import React from 'react'
+import { Text} from 'react-native';
 
-const ASLConverterScreen = () => {
+export const ASLConverterScreen = () => {
   return (
     <>
-      
+      <Text>Hello World!</Text>
     </>
   )
 }
