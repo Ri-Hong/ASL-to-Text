@@ -3,9 +3,6 @@ import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
 import ASLConverterScreen from './app/screens/ASLConverterScreen';
 
-
-import {ASLConverterScreen} from './app/screens/ASLConverterScreen.js';
-
 export default function App() {
 
   return (
