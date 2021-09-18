@@ -1,5 +1,6 @@
 // screen where ASL gets converted into English
 import React from 'react'
+import { Text} from 'react-native';
 
 import {
   View,
