@@ -90,7 +90,6 @@ const ASLConverterScreen = (ASLletter) => {
 				transparent={true}
 				visible={modalVisible}
 				onRequestClose={() => {
-					Alert.alert("Modal has been closed.");
 					setModalVisible(!modalVisible);
 				}}
 			>
@@ -236,7 +235,6 @@ const ASLConverterScreen = (ASLletter) => {
 				style={{
 					width: "90%",
 					height: "25%",
-					position: "absolute",
 					backgroundColor: "black",
 					marginLeft: "auto",
 					marginRight: "auto",
