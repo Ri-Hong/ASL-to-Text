@@ -1,5 +1,6 @@
 // screen where ASL gets converted into English
 import React, {useState} from 'react'
+import axios from 'axios'
 
 import {
   SafeAreaView,
@@ -19,19 +20,37 @@ import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommun
 const logo = require('../assets/Logo.png');
 
 const ASLConverterScreen = () => {
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [email, setEmail] = useState();
+  // Phone number should be in this type of format: +16471234567 (aka +1 international, then phone number)
   const [phoneNumber, setPhoneNumber] = useState();
   const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
 
+  // trying to make JSON object here
+  let SMSPayload = [
+    {
+      phoneNumber: "none",
+      message: "none"
+    }
+  ]
+
   function sendSms(){
-    console.log("sendSms: Sending phone number: ", phoneNumber)
-    axios.post("https://asl-to-text.herokuapp.com/sms", phoneNumber)
+    
+    SMSPayload = [
+      {
+        phoneNumber: phoneNumber.toString(),
+        message: "TODO: Change me!"
+      }
+    ]
+
+    console.log("sendSms: Sending payload: ", SMSPayload)
+    axios.post("https://asl-to-text.herokuapp.com/sms", SMSPayload)
       .then(response => {
-        console.log("Response, ", response)
+        console.log("sendSms Response, ", response)
       })
       .catch(error => {
-        console.error("Error ", error)
+        console.error("sendSms Error ", error)
       })
   }
 
