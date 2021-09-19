@@ -1,60 +1,41 @@
-require("dotenv").config();
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-const personalPhoneNumber = process.env.YOUR_PHONE_NUMBER.toString();
-const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER.toString();
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
-// sanity check
-// console.log(personalPhoneNumber);
-// console.log(twilioPhoneNumber);
+var app = express();
 
-// Download the helper library from https://www.twilio.com/docs/node/install
-// Find your Account SID and Auth Token at twilio.com/console
-// and set the environment variables. See http://twil.io/secure
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-// just making sure it works u k
-function logStuff(twilioResponse = null){
-  if (twilioResponse !== null){
-    console.log(twilioResponse.status);
-    console.log(twilioResponse.error_code);
-    console.log(twilioResponse.error_message);
-  }
-}
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// ctrl+c + ctrl+v via Twilio
-client.messages
-      .create({
-         body: 'Twilio test message - success!',
-         from: twilioPhoneNumber,
-         statusCallback: 'http://postb.in/1234abcd',
-         to: personalPhoneNumber
-       })
-      .then(message => logStuff(message));
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
-// Example JSON response
-// {
-//   "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-//   "api_version": "2010-04-01",
-//   "body": "McAvoy or Stewart? These timelines can get so confusing.",
-//   "date_created": "Thu, 30 Jul 2015 20:12:31 +0000",
-//   "date_sent": "Thu, 30 Jul 2015 20:12:33 +0000",
-//   "date_updated": "Thu, 30 Jul 2015 20:12:33 +0000",
-//   "direction": "outbound-api",
-//   "error_code": null,
-//   "error_message": null,
-//   "from": "+15017122661",
-//   "messaging_service_sid": "MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-//   "num_media": "0",
-//   "num_segments": "1",
-//   "price": null,
-//   "price_unit": null,
-//   "sid": "SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-//   "status": "sent",
-//   "subresource_uris": {
-//     "media": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json"
-//   },
-//   "to": "+15558675310",
-//   "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
-// }
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
