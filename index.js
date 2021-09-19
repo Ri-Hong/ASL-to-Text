@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 const data = require("./data.json");
 
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 3001;
+
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.get('/', (req, res) => {
   res.send("Hello, World!");
