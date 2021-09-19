@@ -5,7 +5,9 @@ import {
   SafeAreaView,
   View,
   Image,
-  Button
+  Button,
+  Text,
+  TouchableOpacity
 } from 'react-native'
 
 const logo = require('../assets/Logo.png');
@@ -48,24 +50,49 @@ const ASLConverterScreen = () => {
           style={{
             flexDirection: 'row',
             alignItems: "center",
-            border: "3px solid red",
+            marginRight: "5%",
           }}
         >
-          <Button
-            title="Clear"
+          <TouchableOpacity
             onPress={() => console.log("Clear")}
-            style={{
-              paddingRight: 10
+            style = {{
+              alignItems: "center",
+              backgroundColor: "#e7eedaff",
+              padding: 10,
+              borderRadius: 15,
+              borderColor: "#b7b7b7",
+              borderWidth: "1px",
             }}
-          ></Button>
+          >
+            <Text 
+              style={{
+                fontSize: 30,
+                color: "#666666"
+              }}
+              >Clear
+            </Text>
+          </TouchableOpacity>
 
-          <Button
-            title="Read"
+          <TouchableOpacity   
             onPress={() => console.log("Read")}
-            style={{
-              marginRight: 30,
+            style = {{
+              alignItems: "center",
+              backgroundColor: "#e7eedaff",
+              padding: 10,
+              borderRadius: 15,
+              borderColor: "#b7b7b7",
+              borderWidth: "1px",
+              marginLeft: 20
             }}
-          ></Button>
+          >
+            <Text 
+              style={{
+                fontSize: 30,
+                color: "#666666"
+              }}
+              >Read
+            </Text>
+          </TouchableOpacity>
 
         </View>
 
