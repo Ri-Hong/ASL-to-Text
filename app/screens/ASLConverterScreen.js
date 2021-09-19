@@ -19,7 +19,7 @@ import IconMaterialCommunityIcons from "react-native-vector-icons/MaterialCommun
 
 const logo = require("../assets/Logo.png");
 
-const ASLConverterScreen = (ASLletter) => {
+const ASLConverterScreen = ({ ASLletter, HandleOpenCam, HandleCloseCam }) => {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [email, setEmail] = useState();
 	// Phone number should be in this type of format: +16471234567 (aka +1 international, then phone number)
@@ -52,16 +52,19 @@ const ASLConverterScreen = (ASLletter) => {
 	const openEmailModal = () => {
 		setModalVisible(true);
 		setEmailOrPhoneNumber("email");
+		HandleCloseCam();
 	};
 
 	const openPhoneModal = () => {
 		setModalVisible(true);
 		setEmailOrPhoneNumber("phone number");
+		HandleCloseCam();
 	};
 
 	const openSMSModal = () => {
 		setModalVisible(true);
 		setEmailOrPhoneNumber("phone number");
+		HandleCloseCam();
 	};
 
 	const onSend = () => {
@@ -69,12 +72,14 @@ const ASLConverterScreen = (ASLletter) => {
 		sendSms();
 		setEmail("");
 		setPhoneNumber("");
+		HandleOpenCam();
 	};
 
 	const onCancel = () => {
 		setModalVisible(false);
 		setEmail("");
 		setPhoneNumber("");
+		HandleOpenCam();
 	};
 
 	return (

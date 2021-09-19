@@ -3,11 +3,11 @@ import React, { useEffect } from "react";
 
 const URL = "https://teachablemachine.withgoogle.com/models/n1IT01v7D/";
 
-let letter, model, webcam, maxPredictions;
+let letter, webcam, model, maxPredictions;
 let predictionObj = {};
 let SecpredictionObj = {};
 
-async function RenderASL() {
+async function RenderASL(WEBCAM) {
 	const modelURL = URL + "model.json";
 	const metadataURL = URL + "metadata.json";
 
@@ -21,8 +21,11 @@ async function RenderASL() {
 	// Convenience function to setup a webcam
 	const flip = true; // whether to flip the webcam
 	webcam = new tmImage.Webcam(1000, 700, flip); // width, height, flip
+	WEBCAM.current = webcam;
+	console.log(WEBCAM);
+
 	await webcam.setup(); // request access to the webcam
-	await webcam.play();
+
 	window.requestAnimationFrame(loop);
 
 	document.getElementById("webcam-container").appendChild(webcam.canvas);
@@ -61,18 +64,19 @@ function CalpPrediction() {
 		if (value > highestVal) {
 			highestVal = value;
 			letter = key;
-			console.log(letter);
+			// console.log(letter);
 		}
 	}
 }
 
-const ASLtoText = ({ ASLletter }) => {
-	RenderASL();
+const ASLtoText = ({ ASLletter, WEBCAM }) => {
+	RenderASL(WEBCAM);
+	console.log(webcam);
 
 	useEffect(() => {
 		ASLletter.current = letter;
-		console.log(letter);
 	}, [letter]);
+
 	return <div></div>;
 };
 
