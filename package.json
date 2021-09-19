@@ -1,16 +1,27 @@
 {
   "name": "asl-to-text",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Send SMS messages via this Node.js backend.",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ri-Hong/ASL-to-Text.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ri-Hong/ASL-to-Text/issues"
+  },
+  "homepage": "https://github.com/Ri-Hong/ASL-to-Text#readme",
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "16.9.1"
   }
 }
