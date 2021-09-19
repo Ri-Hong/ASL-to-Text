@@ -24,6 +24,17 @@ const ASLConverterScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
 
+  function sendSms(){
+    console.log("sendSms: Sending phone number: ", phoneNumber)
+    axios.post("https://asl-to-text.herokuapp.com/sms", phoneNumber)
+      .then(response => {
+        console.log("Response, ", response)
+      })
+      .catch(error => {
+        console.error("Error ", error)
+      })
+  }
+
   const openEmailModal = () => {
     setModalVisible(true);
     setEmailOrPhoneNumber("email");
@@ -41,6 +52,7 @@ const ASLConverterScreen = () => {
 
   const onSend = () => {
     setModalVisible(false);
+    sendSms();
     setEmail("");
     setPhoneNumber("");
   }
