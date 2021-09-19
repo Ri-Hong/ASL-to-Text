@@ -9,7 +9,6 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
-import Icon from 'react-native-vector-icons/AntDesign';
 
 import IconFontisto from 'react-native-vector-icons/Fontisto'
 import IconIonicons from 'react-native-vector-icons/Ionicons'
@@ -20,7 +19,6 @@ const logo = require('../assets/Logo.png');
 const ASLConverterScreen = () => {
 
   return (
-
     // This View is the background
     <SafeAreaView
       style={{
@@ -69,45 +67,59 @@ const ASLConverterScreen = () => {
               borderWidth: "1px",
             }}
           >
-            <Text 
-              style={{
-                fontSize: 30,
-                color: "#666666"
-              }}
-              >Clear
-            </Text>
+          <IconMaterialIcons name="clear" 
+            size={40}
+          ></IconMaterialIcons>
+
           </TouchableOpacity>
 
-          <TouchableOpacity   
-            onPress={() => console.log("Read")}
-            style = {{
-              alignItems: "center",
-              backgroundColor: "#e7eedaff",
-              padding: 10,
-              borderRadius: 15,
-              borderColor: "#b7b7b7",
-              borderWidth: "1px",
-              marginLeft: 20
-            }}
-          >
-            <Text 
-              style={{
-                fontSize: 30,
-                color: "#666666"
-              }}
-              >Read
-            </Text>
-          </TouchableOpacity>
 
         </View>
 
       </View>
 
+      {/* This View is where the camera viewfinder will be displayed*/}
+      <View
+        style={{
+          width: "90%",
+          height: "25%",
+          backgroundColor: "black",
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: "5%",
+          borderRadius: 30,
+        }}
+      >
+      {/* This View is where the currently interperted letter will be diplayed*/}
+        <View
+          style={{
+            width: 70,
+            height: 70,
+            backgroundColor: "white",
+            borderRadius: 10,
+            marginLeft: "auto",
+            marginTop: "auto",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+
+          <Text
+            style={{
+              fontSize: 50,
+            }}
+          
+          >A</Text>
+
+        </View>
+      </View>
+
+
       {/* This View is the white background where text will be displayed */}
       <View
         style={{
           width: "90%",
-          height: "75%",
+          height: "45%",
           backgroundColor: "white",
           marginLeft: "auto",
           marginRight: "auto",
@@ -120,7 +132,6 @@ const ASLConverterScreen = () => {
       {/* This View is where the SMS, call, and email buttons will be displayed */}
       <View
         style={{
-          backgroundColor: "#daecc3ff",
           flexDirection: 'row',
           justifyContent: "space-evenly",
         }}
