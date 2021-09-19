@@ -9,6 +9,11 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
+import Icon from 'react-native-vector-icons/AntDesign';
+
+import IconFontisto from 'react-native-vector-icons/Fontisto'
+import IconIonicons from 'react-native-vector-icons/Ionicons'
+import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 const logo = require('../assets/Logo.png');
 
@@ -102,7 +107,7 @@ const ASLConverterScreen = () => {
       <View
         style={{
           width: "90%",
-          height: "85%",
+          height: "75%",
           backgroundColor: "white",
           marginLeft: "auto",
           marginRight: "auto",
@@ -112,26 +117,79 @@ const ASLConverterScreen = () => {
         }}
       ></View>
 
+      {/* This View is where the SMS, call, and email buttons will be displayed */}
+      <View
+        style={{
+          backgroundColor: "#daecc3ff",
+          flexDirection: 'row',
+          justifyContent: "space-evenly",
+        }}
+      >
+        {/* Email Button */}
+        <TouchableOpacity
+          onPress={() => console.log("Email")}
+          style = {{
+            height: 75,
+            width: 75,
+            backgroundColor: "#e7eedaff",
+            borderRadius: "100%",
+            borderColor: "#b7b7b7",
+            borderWidth: "1px",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <IconFontisto name="email" 
+            size={40}
+          ></IconFontisto>
+
+        </TouchableOpacity>
+
+        {/* Phone Button */}
+        <TouchableOpacity
+          onPress={() => console.log("Call")}
+          style = {{
+            height: 75,
+            width: 75,
+            backgroundColor: "#e7eedaff",
+            borderRadius: "100%",
+            borderColor: "#b7b7b7",
+            borderWidth: "1px",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <IconIonicons name="call" 
+            size={40}
+          ></IconIonicons>
+
+        </TouchableOpacity>
+
+       {/* SMS Button */}
+       <TouchableOpacity
+          onPress={() => console.log("SMS")}
+          style = {{
+            height: 75,
+            width: 75,
+            backgroundColor: "#e7eedaff",
+            borderRadius: "100%",
+            borderColor: "#b7b7b7",
+            borderWidth: "1px",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <IconMaterialIcons name="sms" 
+            size={40}
+          ></IconMaterialIcons>
+
+        </TouchableOpacity>
+      </View>
+
+
     </SafeAreaView>
   )
 }
 
-    // // Text Area
-    // <View
-    //   style={{
-    //     flex: 1,
-    //     backgroundColor: "#e4eed6ff"
-    //   }}
-    // >
-
-    //   {/* Top Bar */}
-    //   <View
-    //     style={{
-    //       flex: 5,
-    //       backgroundColor: "#daecc3ff"
-    //     }}
-    //   ></View>
-
-    // </View>
 
 export default ASLConverterScreen
