@@ -28,21 +28,21 @@ const ASLConverterScreen = () => {
   const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
 
   // trying to make JSON object here
-  let SMSPayload = [
+  let SMSPayload = 
     {
       phoneNumber: "none",
       message: "none"
     }
-  ]
+  
 
   function sendSms(){
     
-    SMSPayload = [
+    SMSPayload = 
       {
         phoneNumber: phoneNumber.toString(),
         message: "TODO: Change me!"
       }
-    ]
+    
 
     console.log("sendSms: Sending payload: ", SMSPayload)
     axios.post("https://asl-to-text.herokuapp.com/sms", SMSPayload)
