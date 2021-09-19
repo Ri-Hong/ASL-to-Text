@@ -4,8 +4,8 @@ const personalPhoneNumber = process.env.YOUR_PHONE_NUMBER.toString();
 const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER.toString();
 
 // sanity check
-console.log(personalPhoneNumber);
-console.log(twilioPhoneNumber);
+// console.log(personalPhoneNumber);
+// console.log(twilioPhoneNumber);
 
 // Download the helper library from https://www.twilio.com/docs/node/install
 // Find your Account SID and Auth Token at twilio.com/console
