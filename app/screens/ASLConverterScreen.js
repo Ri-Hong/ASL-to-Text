@@ -1,24 +1,58 @@
 // screen where ASL gets converted into English
-import React from 'react'
+import React, {useState} from 'react'
 
 import {
   SafeAreaView,
   View,
   Image,
-  Button,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal,
+  TextInput
 } from 'react-native'
 
 import IconFontisto from 'react-native-vector-icons/Fontisto'
 import IconIonicons from 'react-native-vector-icons/Ionicons'
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const logo = require('../assets/Logo.png');
 
 const ASLConverterScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [email, setEmail] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
+
+  const openEmailModal = () => {
+    setModalVisible(true);
+    setEmailOrPhoneNumber("email");
+  }
+
+  const openPhoneModal = () => {
+    setModalVisible(true);
+    setEmailOrPhoneNumber("phone number");
+  }
+
+  const openSMSModal = () => {
+    setModalVisible(true);
+    setEmailOrPhoneNumber("phone number");
+  }
+
+  const onSend = () => {
+    setModalVisible(false);
+    setEmail("");
+    setPhoneNumber("");
+  }
+
+  const onCancel = () => {
+    setModalVisible(false);
+    setEmail("");
+    setPhoneNumber("");
+  }
 
   return (
+
     // This View is the background
     <SafeAreaView
       style={{
@@ -27,10 +61,109 @@ const ASLConverterScreen = () => {
       }}
     >
 
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={{
+          backgroundColor: "#dbe8ca",
+          borderRadius: 20,
+          padding: 35,
+          alignItems: "center",
+          height: "100%",
+        }}>
+
+          {emailOrPhoneNumber === "email" ?
+          <Text style={{
+            fontWeight: "bold",
+            fontSize: 27,
+            marginTop: "10%",
+            textAlign: "center"
+          }}>Enter your recipient's email</Text>
+          : 
+          <Text style={{
+            fontWeight: "bold",
+            fontSize: 27,
+            marginTop: "10%",
+            textAlign: "center"
+          }}>Enter your recipient's phone number</Text>
+          }
+
+          {emailOrPhoneNumber === "email" ?
+              <TextInput
+              style={{
+                height: 40,
+                borderWidth: 1,
+                borderRadius: 10,
+                width: "95%",
+                margin: "5%",
+                padding: 10,
+                fontSize: 20
+              }}
+              onChangeText={setEmail}
+              value={email}
+            />
+            : 
+            <TextInput
+            style={{
+              height: 40,
+              borderWidth: 1,
+              borderRadius: 10,
+              width: "95%",
+              margin: "5%",
+              padding: 10,
+              fontSize: 20
+            }}
+            onChangeText={setPhoneNumber}
+            value={phoneNumber}
+          />
+          }
+
+
+          <View
+            style={{
+              flexDirection: 'row',
+              borderWeight: 1,
+              borderColor: "red",
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => onCancel()}
+            >
+              <IconMaterialIcons name="clear" 
+                size={40}
+                style={{
+                  marginRight: "50%",
+                }}
+              ></IconMaterialIcons>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => onSend()}
+            >
+              <IconIonicons name="ios-send" 
+                size={40}
+                style={{
+                  marginRight: "3%",
+                }}
+              ></IconIonicons>
+            </TouchableOpacity>
+
+
+          </View>
+
+        </View>
+      </Modal>
+
+
       {/* This View is the top navbar */}
       <View
         style={{
-          backgroundColor: "#daecc3ff",
           height: "12%",
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -72,7 +205,6 @@ const ASLConverterScreen = () => {
           ></IconMaterialIcons>
 
           </TouchableOpacity>
-
 
         </View>
 
@@ -138,7 +270,7 @@ const ASLConverterScreen = () => {
       >
         {/* Email Button */}
         <TouchableOpacity
-          onPress={() => console.log("Email")}
+          onPress={() => openEmailModal()}
           style = {{
             height: 75,
             width: 75,
@@ -150,15 +282,15 @@ const ASLConverterScreen = () => {
             justifyContent: "center"
           }}
         >
-          <IconFontisto name="email" 
+          <IconMaterialCommunityIcons name="email" 
             size={40}
-          ></IconFontisto>
+          ></IconMaterialCommunityIcons>
 
         </TouchableOpacity>
 
         {/* Phone Button */}
         <TouchableOpacity
-          onPress={() => console.log("Call")}
+          onPress={() => openPhoneModal()}
           style = {{
             height: 75,
             width: 75,
@@ -178,7 +310,7 @@ const ASLConverterScreen = () => {
 
        {/* SMS Button */}
        <TouchableOpacity
-          onPress={() => console.log("SMS")}
+          onPress={() => openSMSModal()}
           style = {{
             height: 75,
             width: 75,
