@@ -28,20 +28,29 @@ const ASLConverterScreen = () => {
   const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
 
   // trying to make JSON object here
-  let SMSPayload = 
-    {
-      phoneNumber: "none",
-      message: "none"
-    }
+  let SMSPayload = {
+    phoneNumber: "none",
+    message: "none"
+  }
+
+  function getTestData(){
+    console.log("getTestData: getting data");
+    axios.get("https://asl-to-text.herokuapp.com/test")
+      .then(response => {
+        console.log("getTestData Response, ", response)
+      })
+      .catch(error => {
+        console.error("getTestData Error ", error)
+      })
+  }
   
 
   function sendSms(){
     
-    SMSPayload = 
-      {
-        phoneNumber: phoneNumber.toString(),
-        message: "TODO: Change me!"
-      }
+    SMSPayload = {
+      phoneNumber: phoneNumber.toString(),
+      message: "TODO: Change me!"
+    }
     
 
     console.log("sendSms: Sending payload: ", SMSPayload)
@@ -71,7 +80,8 @@ const ASLConverterScreen = () => {
 
   const onSend = () => {
     setModalVisible(false);
-    sendSms();
+    // sendSms();
+    getTestData();
     setEmail("");
     setPhoneNumber("");
   }
