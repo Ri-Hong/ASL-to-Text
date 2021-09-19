@@ -1,5 +1,12 @@
 require("dotenv").config();
 
+const personalPhoneNumber = process.env.YOUR_PHONE_NUMBER.toString();
+const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER.toString();
+
+// sanity check
+console.log(personalPhoneNumber);
+console.log(twilioPhoneNumber);
+
 // Download the helper library from https://www.twilio.com/docs/node/install
 // Find your Account SID and Auth Token at twilio.com/console
 // and set the environment variables. See http://twil.io/secure
@@ -7,14 +14,24 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
+// just making sure it works u k
+function logStuff(twilioResponse = null){
+  if (twilioResponse !== null){
+    console.log(twilioResponse.status);
+    console.log(twilioResponse.error_code);
+    console.log(twilioResponse.error_message);
+  }
+}
+
+// ctrl+c + ctrl+v via Twilio
 client.messages
       .create({
-         body: 'McAvoy or Stewart? These timelines can get so confusing.',
-         from: '+15017122661',
+         body: 'Twilio test message - success!',
+         from: twilioPhoneNumber,
          statusCallback: 'http://postb.in/1234abcd',
-         to: '+15558675310'
+         to: personalPhoneNumber
        })
-      .then(message => console.log(message.sid));
+      .then(message => logStuff(message));
 
 // Example JSON response
 // {
